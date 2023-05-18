@@ -13,56 +13,74 @@ $variabel = new MongoDB\Client
 ```
 
 # DAFTAR SEMUA DATABASE
-<code>$variabel->listDatabases()</code>
+```
+$variabel->listDatabases()
+```
 
 # MENGHAPUS DATABASE
-<code>$variabel->dropDatabase('namaDatabase')</code>
+```
+$variabel->dropDatabase('namaDatabase')
+```
 
 # MEMBUAT /  MEMILIH DATABASE
-<code>$db = $variabel->namaDatabase</code>
+```
+$db = $variabel->namaDatabase
+```
 
 # MEMBUAT COLLECTION
-<code>$db->createCollection('namaCollection')</code>
+```$db->createCollection('namaCollection')```
 
 # DAFTAR SEMUA COLLECTION
-<code>$db->listCollections()<code>
+```$db->listCollections()```
 
 # MENGHAPUS COLLECTION
-<code>$db->dropCollection('namaCollection')</code>
+```$db->dropCollection('namaCollection')```
 
 ========================================
 INSERT DOCUMENTS
 ========================================
 
 # INSERT 1 DATA
-<code>insertOne([])</code>
+```insertOne([])```
 
 # INSERT BANYAK DATA
-<code>insertMany([[],[]])</code>
+```insertMany([[],[]])```
 
 # MEMBACA BERAPA BANYAK DATA YANG DI INSERT
-<code>getInsertedCount()</code>
+```
+getInsertedCount()
+```
 
 # MEMBACA 1 ID YANG BERHASIL DI INSERT
-<code>getInsertedId()</code>
+```
+getInsertedId()
+```
 
 # MEMBACA BANYAK ID YANG BERHASIL DI INSERT
-<code>getInsertedIds()</code>
+```
+getInsertedIds()
+```
 
 ========================================
 QUERY DOCUMENTS
 ========================================
 
 # MENAMPILKAN SEMUA FIELDS / RECORD PADA COLLECTION
-<code>find()</code> *Hasil bisa di looping
+```
+find() *Hasil bisa di looping
+```
 
 # MENCARI 1 DOKUMEN / DATA (BERDASARKAN ID)
-<code>findOne(['_id' => integer|number|string])</code>
+```
+findOne(['_id' => integer|number|string])
+```
 
 # MENCARI 1 ATAU LEBIH DOKUMEN / DATA (BERDASARKAN SELAIN ID)
-<code>find(
+```
+find(
 ['skill' => integer|number|string]
-)</code> *Hasil dapat di looping
+) *Hasil dapat di looping
+```
 
 ========================================
 PROJECTION
@@ -71,58 +89,62 @@ PROJECTION
 # PROJECTION / MENCARI DAN MENAMPILKAN HASIL FIELD/RECORD DI INGINKAN SAJA
 1 = TAMPIL
 0 = SEMBUNYIKAN
-<code>
+```
 $cari = $db->find(
 	['skill' => 'mongoDB'],
 	['projection' => ['_id' => 0, 'name' => 1, ...field lainnya]]
 	)
-</code>
+```
 ========================================
 UPDATE DOCUMENT
 ========================================
 
 # UPDATE 1 DOKUMEN (UPDATE TANPA PENCARIAN ID)
-<code>
+```
 	updateOne(
 	['umur' => 20],
 	['$set' => ['umur'=> 21]]
 	)
-</code>
+```
 *Cari data yang pertama ditemukan dengan umur 20, update menjadi 21
 *Parameter pertama: pencarian data
 *Paremeter kedua: SET data
 
 # UPDATE BANYAK DOKUMEN (UPDATE TANPA PENCARIAN ID)
-<code>
+```
 updateMany(
 	['umur' => 20],
 	['$set' => ['umur'=> 21]]
 	)
-</code>
+```
 	
 # UPDATE DOKUMEN DENGAN MENAMBAH KOLOM/FIELD/KEY
-<code>
+```
 updateMany(
 	['umur' => 20],
 	['$set' => ['fieldYangTidakAda'=> 'sekarangAdaFieddanIsi']]
 	)
-</code>
 *Bisa dengan updateOne / updateMany
+```
 
 # MENGEMBALIKAN BERAPA DATA YANG COCOK
-<code>getMatchedCount()</code>
+```
+getMatchedCount()
+```
 
 # MENGEMBALIKAN BERAPA DATA YANG BERHASIL DI UPDATE
-<code>getModifiedCount()</code>
+```
+getModifiedCount()
+```
 
 
 # REPLACE DOKUMEN
-<code>
+```
 replaceOne(
 ['_id' => '1'],
 ['_id' => '1', 'keynya' => 'valuenya']
 )
-</code>
+```
 
 ========================================
 LIMIT, SKIP & SORT
@@ -131,7 +153,7 @@ LIMIT, SKIP & SORT
 2. limit, untuk membatasi data yang tampil
 3. skip, untuk melangkahi berapa banyak dokumen
 4. sort, angka integer: 1 = Ascending, -1 = Descending
-<code>
+```
 find(
 [],
 [
@@ -140,7 +162,7 @@ find(
 'sort'	=> ['usia' => -1]
 ]
 )
-</code>
+```
 *Parameter pertama berupa array pencarian atau kosongkan untuk semua dokumen
 
 
@@ -148,28 +170,34 @@ find(
 DELETE DOCUMENTS
 ========================================
 # MENGHAPUS 1 DOKUMEN
+```
 deleteOne(['_id' => '1'])
+```
 
 #MENGHAPUS LEBIH DARI 1 DOKUMEN
-<code>deleteMany(['usia' => 20])</code>
+```
+deleteMany(['usia' => 20])
+```
 *Menghapus semua dokumen yang mempunyai usia 20
 
 # MENGHAPUS SEMUA DOKUMEN DALAM COLLECTION
-<code>deleteMany([])</code>
+```
+deleteMany([])
+```
 
 # MENGEMBALIKAAN JUMLAH YANG TERHAPUS
-<code>getDeletedCount()</code>
-
-
+```
+getDeletedCount()
+```
 
 ========================================
 UPDATE SEMUA KEYS
 ========================================
-<code>
+```
 $db->nama_collection->updateMany([],
 ['$rename' => ['keyOld' => 'keyNew']]
 )
-</code>
+```
 
 * Gunakan variabel $rename untuk mengganti key
 * Statement pertama (array) biarkan kosong untuk mencari semua
@@ -178,7 +206,7 @@ $db->nama_collection->updateMany([],
 ========================================
 JOIN 2 ATAU LEBIH COLLECTIONS
 ========================================
-<code>
+```
 $data = $conn->students->aggregate([
     [
         '$lookup' => [
@@ -192,7 +220,7 @@ $data = $conn->students->aggregate([
         'class_name' => 1,
     ]]
 ]);
-</code>
+```
 
 * Join antara tabel 'classroom' dengan 'student'
 * From: sengan tabel apa?
@@ -202,7 +230,7 @@ $data = $conn->students->aggregate([
 --
 * $project: variabel untuk menampilkan fied yang mana saja/pilihan
 
-<code>
+```
 $data = $conn->posts->aggregate([
     [
         '$lookup' => [
@@ -233,9 +261,11 @@ $data = $conn->posts->aggregate([
     ],
     ['$project' => []]
 ]);
-</code>
+```
 
 ========================================
 RENAME COLLECTION
 ========================================
-<code>$db->NAMA_COLLECTION->rename('NAM_COLLECTION_BARU')</code>
+```
+$db->NAMA_COLLECTION->rename('NAM_COLLECTION_BARU')
+```
