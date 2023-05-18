@@ -8,7 +8,7 @@ MONGODB PHP SYNTAX
 DATABASE & COLLECTIONS
 ========================================
 # MEMBUAT KONEKSI / CONNECTION
-$variabel = new MongoDB\Client
+<code>$variabel = new MongoDB\Client<code>
 
 # DAFTAR SEMUA DATABASE
 $variabel->listDatabases()
